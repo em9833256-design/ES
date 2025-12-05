@@ -141,48 +141,18 @@ audio{ display:none; margin:6px auto 12px auto; width:100%; }
 <script>
 const sheikData = {
     egypt:[
-        {id:"abdulbaset", name:"الشيخ عبد الباسط عبد الصمد"},
         {id:"manshawi", name:"الشيخ محمد صديق المنشاوي"},
+        {id:"abdulbaset", name:"الشيخ عبد الباسط عبد الصمد"},
         {id:"hossary", name:"الشيخ محمود خليل الحصري"},
         {id:"mostafa", name:"الشيخ مصطفى إسماعيل"},
-        {id:"ahmed", name:"الشيخ أحمد عبد الحليم"},
-        {id:"karim", name:"الشيخ كريم مصطفى"},
-        {id:"mohamed", name:"الشيخ محمد جبريل"},
-        {id:"ali_hadifi", name:"الشيخ علي الحذيفي"},
-        {id:"saber", name:"الشيخ محمود صابر"},
-        {id:"mohamed_ismail", name:"الشيخ محمد إسماعيل"},
-        {id:"mohamed_saeed", name:"الشيخ محمد سعيد"},
-        {id:"ahmed_sadek", name:"الشيخ أحمد صديق"},
-        {id:"mohamed_mahmoud", name:"الشيخ محمد محمود"},
-        {id:"yahia", name:"الشيخ يحيى البدوي"},
-        {id:"mustafa_manshawi", name:"الشيخ مصطفى المنشاوي"},
-        {id:"mohamed_ahmed", name:"الشيخ محمد أحمد"},
-        {id:"ali_mostafa", name:"الشيخ علي مصطفى"},
-        {id:"hassan_ali", name:"الشيخ حسن علي"},
-        {id:"sami_ibrahim", name:"الشيخ سامي إبراهيم"},
-        {id:"ahmed_hassan", name:"الشيخ أحمد حسن"}
+        {id:"ahmed", name:"الشيخ سيد سعيد"}
     ],
     saudi:[
         {id:"yasser", name:"الشيخ ياسر الدوسري"},
         {id:"khaled", name:"الشيخ خالد الجليل"},
-        {id:"shuraim", name:"الشيخ سعود الشريم"},
         {id:"maher", name:"الشيخ ماهر المعقلي"},
         {id:"ayoub", name:"الشيخ محمد أيوب"},
-        {id:"ali_jaber", name:"الشيخ علي جابر"},
-        {id:"abdullah", name:"الشيخ عبدالله الجهني"},
-        {id:"saud", name:"الشيخ سعود الحارثي"},
-        {id:"mohammed", name:"الشيخ محمد العجلان"},
-        {id:"fahad", name:"الشيخ فهد البريك"},
-        {id:"abdullah2", name:"الشيخ عبدالله السلمي"},
-        {id:"ali2", name:"الشيخ علي العريني"},
-        {id:"omar", name:"الشيخ عمر القاضي"},
-        {id:"salman", name:"الشيخ سلمان العودة"},
-        {id:"mohamed_saqr", name:"الشيخ محمد صقر"},
-        {id:"abdullah_zaid", name:"الشيخ عبد الله الزيد"},
-        {id:"abdullah_tayar", name:"الشيخ عبدالله الطيار"},
-        {id:"sulaiman", name:"الشيخ سليمان العلي"},
-        {id:"fahad_ghamdi", name:"الشيخ فهد الغامدي"},
-        {id:"saleh", name:"الشيخ صالح الغامدي"}
+        {id:"ali_jaber", name:"الشيخ علي جابر"}
     ]
 };
 
@@ -258,7 +228,6 @@ function showSurahs(sheikId,sheikName){
         const id=s[0], title=s[1], ayat=s[2];
         const surahDiv=document.createElement("div");
         surahDiv.className="surah";
-        surahDiv.dataset.audioId="audio-"+id;
 
         const numSpan=document.createElement("div");
         numSpan.className="num";
@@ -276,7 +245,7 @@ function showSurahs(sheikId,sheikName){
         audioEl.controls=true;
         audioEl.style.display="none";
         const source=document.createElement("source");
-        source.src=`https://server8.mp3quran.net/${sheikId}/${id}.mp3`;
+        source.src=`audio/${sheikId}/${id}.mp3`; // ← ضع هنا الملف الصوتي لكل سورة
         source.type="audio/mpeg";
         audioEl.appendChild(source);
 
@@ -293,6 +262,7 @@ function toggleAudio(targetId){
     if(target.style.display==="block"){ target.pause(); target.style.display="none"; return; }
     audios.forEach(a=>{ if(a.id!==targetId){ try{a.pause();a.currentTime=0;}catch(e){} a.style.display="none"; } });
     target.style.display="block";
+    target.play();
 }
 
 function goBack(){
@@ -305,10 +275,3 @@ function goBack(){
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
